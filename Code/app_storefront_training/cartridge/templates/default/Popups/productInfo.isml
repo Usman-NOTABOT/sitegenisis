@@ -1,0 +1,104 @@
+<isinclude template="util/modules" />
+
+
+<div class="product-col-2 product-detail">
+    <isset name="productLineItem" value="${pdict.productLineItem}" scope="page" />
+    <h1 class="product-name" itemprop="name">
+        <isprint value="${productLineItem.productName}" />
+    </h1>
+    <h1 class="product-name" itemprop="name">
+        <isprint value="${productLineItem.product.custom.level}" />
+    </h1>
+
+    <h1>Images</h1>
+    <div class="mini-cart-image">
+        <isif condition="${productLineItem.product != null && productLineItem.product.getImage('small', 0) != null}">
+            <img src="${productLineItem.product.getImage('small', 0).getURL()}"
+                alt="${productLineItem.product.getImage('small', 0).alt}"
+                title="${productLineItem.product.getImage('small', 0).title}" />
+        <iselse/>
+            <img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${productLineItem.productName}"
+                title="${productLineItem.productName}" />
+        </isif>
+    </div>
+    <h1>Variation Selected</h1>
+    <div class="mini-cart-attributes">
+        <isdisplayvariationvalues product="${productLineItem.product}" />
+    </div>
+    <isdisplayproductavailability p_productli="${productLineItem}" p_displayinstock="${false}"
+        p_displaypreorder="${true}" p_displaybackorder="${true}" />
+    <hr />
+
+    <div class="mini-cart-pricing">
+
+        <span class="label">${Resource.msg('global.qty', 'locale', null)}:</span>
+        <span class="value">
+            <isprint value="${productLineItem.quantity}" /></span>
+
+        <isif condition="${productLineItem.bonusProductLineItem}">
+            <isset name="bonusProductPrice" value="${productLineItem.getAdjustedPrice()}" scope="page" />
+            <isinclude template="checkout/components/displaybonusproductprice" />
+            <isprint value="${bonusProductPriceValue}" />
+        <iselse/>
+            <isset name="productTotal" value="${productLineItem.adjustedPrice}" scope="page" />
+            <isif condition="${productLineItem.optionProductLineItems.size() > 0}">
+                <isloop items="${productLineItem.optionProductLineItems}" var="optionLI">
+                    <isset name="productTotal" value="${productTotal.add(optionLI.adjustedPrice)}" scope="page" />
+                </isloop>
+            </isif>
+            <span class="mini-cart-price">
+                Total :
+                <isprint value="${productTotal}" /></span>
+        </isif>
+
+    </div>
+
+    <h1>Cart Total</h1>
+    <isif
+        condition="${(pdict.Basket != null) && (pdict.Basket.productLineItems.size() + pdict.Basket.giftCertificateLineItems.size() > 0)}">
+        <isscript>
+            // calculate the total number of items in the cart by adding quantities together
+            // do not count bonus line items
+            var cartQty : Number = 0;
+            var pliIt : dw.util.Iterator = pdict.Basket.productLineItems.iterator();
+
+            while (pliIt.hasNext()) {
+                var pli : dw.order.ProductLineItem = pliIt.next();
+                cartQty += pli.quantity;
+            }
+
+            // add the gift certificates to cart quantity
+            cartQty += pdict.Basket.giftCertificateLineItems.size();
+        </isscript>
+        <a class="mini-cart-link" href="${URLUtils.https('Cart-Show')}"
+            title="${Resource.msg('minicart.viewcart', 'checkout', null)}">
+            <i class="minicart-icon fa fa-shopping-cart"></i>
+            <span class="minicart-quantity">
+                <isprint value="${cartQty}" formatter="##" />
+            </span>
+        </a>
+    <iselse/>
+        <a class="button mini-cart-link-cart"
+            href="https://bgkr-007.sandbox.us01.dx.commercecloud.salesforce.com/s/SiteGenesis/cart?lang=en_US"
+            title="Go to Cart">View Cart</a>
+        <iscomment> <a class="mini-cart-link mini-cart-empty" href="${URLUtils.https('Cart-Show')}"
+                title="${Resource.msg('minicart.viewcart', 'checkout', null)}"> </iscomment>
+        <i class="fa fa-shopping-cart"></i>
+        <span class="minicart-quantity">0</span>
+        </a>
+    </isif>
+
+
+    <div class="mini-cart-subtotals">
+        <span class="label">${Resource.msg('order.ordersummary.ordersubtotal', 'order', null)}</span>
+        <span class="value">
+            <isprint
+                value="${pdict.Basket.getAdjustedMerchandizeTotalPrice(false).add(pdict.Basket.giftCertificateTotalPrice)}" />
+        </span>
+    </div>
+
+    <div>
+        <a class="button mini-cart-link-cart" href="${URLUtils.url('Cart-Show')}" title="Go to Cart">View Cart</a>
+        <a class="button mini-cart-link-cart" href="${URLUtils.url('Cart-ContinueShopping')}" title="Continue Shopping">Continue Shopping</a>
+    </div>
+</div>

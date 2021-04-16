@@ -1,0 +1,24 @@
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+<isinclude template="util/modules" />
+
+<iscomment> <head>
+    <isinclude template="components/header/htmlhead"/>
+</head> </iscomment>
+
+<h1>Form</h1>
+
+<form action="${URLUtils.httpsContinue()}" method="post" class="form-horizontal" id="HelloForm">
+    <fieldset>
+        <isinputfield formfield="${pdict.CurrentForms.test_form.nickname}" type="input" />
+        <isinputfield formfield="${pdict.CurrentForms.test_form.email}" type="input" />
+        <isif condition="${pdict.error}" >
+        <isprint value="${pdict.error}"/>
+        </isif>
+    </fieldset>
+    <fieldset>
+        <button type="submit" name="${pdict.CurrentForms.test_form.submit.htmlName}" value="submit">Submit</button>
+        <button type="cancel" name="${pdict.CurrentForms.test_form.cancel.htmlName}" value="submit">Cancel</button>
+    </fieldset>
+</form>
+
+<isinclude template="components/footer/footer" />

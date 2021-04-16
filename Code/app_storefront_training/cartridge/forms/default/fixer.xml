@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+
+	<field formid="currency" label="Input:" type="string" mandatory="true" max-length="50" />
+    <field formid="currencyTo" label="currency.to" mandatory="true" type="string"  missing-error="currency.to.required">
+		<options>
+			<option optionid="" label="resource.select" value=""/>
+		</options>
+	</field>
+	<action formid="submit" valid-form="true"/>
+</form>

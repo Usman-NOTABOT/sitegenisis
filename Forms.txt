@@ -1,0 +1,6 @@
+Form :
+
+0)XML
+-binding is for saving data to attr eg, database
+1)Template (form)
+2)Controller to render(also send continue url for actions) and actions

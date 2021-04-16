@@ -1,0 +1,21 @@
+
+Http Api :
+1)BM operations->services (profile and config too)
+2)scripts/init / service file (use local service registry) and create request
+3) scripts/services/ file (ServiceHelper) -> this file recieves data and send that data to service (api call)
+returns response to callback file
+4) controller to call serviceHelper(ajax call) and render template
+5) jquery file (Ajax call -  client side)
+
+
+Example :
+service.js (Service Helper)
+fixerService.js (Service)
+Fixer.js (controller)
+currency.js (Client side)
+
+
+Task :
+-Save access key in preferences and fetch from there (Done)
+-On every request call, save in custom obj and if call again within 5 mins, 
+check if custom obj then get from custom obj and not api call.

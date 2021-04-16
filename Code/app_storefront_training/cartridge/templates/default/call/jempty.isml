@@ -1,0 +1,2 @@
+<iscomment> ${pdict.paramOnPdict.stringValue} </iscomment>
+${JSON.stringify(pdict.CurrentHttpParamtermap)}

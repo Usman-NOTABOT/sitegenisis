@@ -1,0 +1,153 @@
+{
+  "step-types": {
+    "script-module-step": [
+      {
+        "@type-id": "custom.testJob",
+        "@supports-parallel-execution": "false",
+        "@supports-site-context": "true",
+        "@supports-organization-context": "false",
+        "description": "Cleanup currency custom objects created for more than 5 minutes",
+        "module": "app_storefront_training/cartridge/scripts/job/myJob.js",
+        "function": "execute",
+        "transactional": "true",
+        "timeout-in-seconds": "600000",
+        "status-codes": {
+          "status": [
+            {
+              "@code": "ERROR",
+              "description": "Used when the step failed with an error."
+            },
+            {
+              "@code": "FINISHED",
+              "description": "Used when the step finished successfully."
+            },
+            {
+              "@code": "FINISHED_WITH_WARNINGS",
+              "description": "Used when the step finished with warnings."
+            }
+          ]
+        }
+      },
+      {
+        "@type-id": "custom.testMasterProducts",
+        "@supports-parallel-execution": "false",
+        "@supports-site-context": "true",
+        "@supports-organization-context": "false",
+        "description": "Get all Master Products",
+        "module": "app_storefront_training/cartridge/scripts/job/getMasterProducts.js",
+        "function": "execute",
+        "transactional": "true",
+        "timeout-in-seconds": "600000",
+        "status-codes": {
+          "status": [
+            {
+              "@code": "ERROR",
+              "description": "Used when the step failed with an error."
+            },
+            {
+              "@code": "FINISHED",
+              "description": "Used when the step finished successfully."
+            },
+            {
+              "@code": "FINISHED_WITH_WARNINGS",
+              "description": "Used when the step finished with warnings."
+            }
+          ]
+        }
+      },
+      {
+        "@type-id": "custom.testGetORders",
+        "@supports-parallel-execution": "false",
+        "@supports-site-context": "true",
+        "@supports-organization-context": "false",
+        "description": "Get all Master Products",
+        "module": "app_storefront_training/cartridge/scripts/job/getOrders.js",
+        "function": "execute",
+        "transactional": "true",
+        "timeout-in-seconds": "600000",
+        "status-codes": {
+          "status": [
+            {
+              "@code": "ERROR",
+              "description": "Used when the step failed with an error."
+            },
+            {
+              "@code": "FINISHED",
+              "description": "Used when the step finished successfully."
+            },
+            {
+              "@code": "FINISHED_WITH_WARNINGS",
+              "description": "Used when the step finished with warnings."
+            }
+          ]
+        }
+      },
+      {
+        "@type-id": "custom.testProductInventory",
+        "@supports-parallel-execution": "false",
+        "@supports-site-context": "true",
+        "@supports-organization-context": "false",
+        "description": "Check Product Inventory",
+        "module": "app_storefront_training/cartridge/scripts/job/productInventory.js",
+        "function": "execute",
+        "transactional": "true",
+        "timeout-in-seconds": "600000",
+        "status-codes": {
+          "status": [
+            {
+              "@code": "ERROR",
+              "description": "Used when the step failed with an error."
+            },
+            {
+              "@code": "FINISHED",
+              "description": "Used when the step finished successfully."
+            },
+            {
+              "@code": "FINISHED_WITH_WARNINGS",
+              "description": "Used when the step finished with warnings."
+            }
+          ]
+        }
+      },
+      {
+        "@type-id": "custom.testCustomObject",
+        "@supports-parallel-execution": "false",
+        "@supports-site-context": "true",
+        "@supports-organization-context": "false",
+        "description": "Check Product Inventory",
+        "module": "app_storefront_training/cartridge/scripts/job/customObjects.js",
+        "function": "execute",
+        "transactional": "true",
+        "timeout-in-seconds": "600000",
+        "parameters":
+        {
+          "parameter":
+          [
+            {
+              "@name":"time",
+              "@type":"string",
+              "@required":"true",
+              "description":"time in hour"
+            }
+          ]
+        },
+        "status-codes": {
+          "status": [
+            {
+              "@code": "ERROR",
+              "description": "Used when the step failed with an error."
+            },
+            {
+              "@code": "FINISHED",
+              "description": "Used when the step finished successfully."
+            },
+            {
+              "@code": "FINISHED_WITH_WARNINGS",
+              "description": "Used when the step finished with warnings."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
