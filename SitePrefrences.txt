@@ -1,0 +1,10 @@
+Save Site Preferences and Fetch:
+
+
+1)Administration -> Site Development -> System Obj type
+2) Add in site preferences Object and Group
+3)Merchant -> Site preferences -> Custom Preferences -> Add value in that Group
+
+Code :
+var Site = require("dw/system/Site");
+var accessKey = Site.getCurrent().getCustomPreferenceValue("fixer-access-key");

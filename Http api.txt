@@ -1,4 +1,3 @@
-
 Http Api :
 1)BM operations->services (profile and config too)
 2)scripts/init / service file (use local service registry) and create request
@@ -7,15 +6,34 @@ returns response to callback file
 4) controller to call serviceHelper(ajax call) and render template
 5) jquery file (Ajax call -  client side)
 
-
-Example :
-service.js (Service Helper)
-fixerService.js (Service)
-Fixer.js (controller)
-currency.js (Client side)
-
-
 Task :
--Save access key in preferences and fetch from there (Done)
 -On every request call, save in custom obj and if call again within 5 mins, 
 check if custom obj then get from custom obj and not api call.
+
+BM :
+1) Make Custom Object (primary key,Data)
+-Admin -> site developemnt -> Custom Object Types (add / Grouping)
+-Check in merchant tools custom objects
+
+2) Api success -> return data and new Object instance
+Custom Obj manager create with primary key and set custom attrs values
+
+ var Transaction = require("dw/system/Transaction");
+        Transaction.wrap(function () {
+		//Create
+            var obj = CustomObjectMgr.createCustomObject("fixer",params.symbol);
+		//set value
+            obj.custom.convertedAmount = amountRate;
+        });
+        return result;
+
+3) Before Api call check in Objects 
+	
+	var customObj = CustomObjectMgr.getCustomObject("fixer", params.symbol);
+        if(customObj != null){
+            var rateToConvert = new Decimal(customObj.custom.convertedAmount);
+            var convertedAmount = amount.multiply(rateToConvert);
+            result.success = true;
+            result.convertedAmountData =convertedAmount.get();
+            return result;
+        }
