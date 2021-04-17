@@ -276,6 +276,7 @@
 <ismodule template="components/order/ordertotals"
     name="ordertotals"
     attribute="p_lineitemctnr"
+    attribute="p_romtotal"
     attribute="p_showshipmentinfo"
     attribute="p_shipmenteditable"
     attribute="p_totallabel"

@@ -131,6 +131,14 @@
 
                 <td><isprint value="${pdict.p_totallabel}"/></td>
                 <td class="order-value"><isprint value="${orderTotalValue}"/></td>
+                <iscomment> order properties file </iscomment>
+
+                <iscomment> <td>${Resource.msg("order.rom.currency","order",null)}<isprint value="${pdict.p_romtotal}"/></td> </iscomment>
+
+                <iscomment> //msgf for parameter </iscomment>
+                <td>${Resource.msgf("order.rom.currency","order",null,pdict.p_romtotal)}</td>
+
+
             </tr>
         </tbody>
     </table>

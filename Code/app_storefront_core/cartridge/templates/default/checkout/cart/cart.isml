@@ -10,7 +10,8 @@
     <isslot id="cart-banner" description="Banner for Cart page" context="global" />
 
 
-    <h1>CART ISML TEMPLATE </h1>
+    <h1>CART ISML TEMPLATE</h1>
+    
 
     <isif condition="${pdict.Basket == null || (empty(pdict.Basket.productLineItems) && empty(pdict.Basket.giftCertificateLineItems))}">
         <div class="cart-empty">
@@ -835,7 +836,7 @@
 
                     <input type="hidden" name="${pdict.CurrentForms.cart.updateCart.htmlName}" value="${pdict.CurrentForms.cart.updateCart.htmlName}"/>
                     <div class="cart-order-totals">
-                        <isordertotals p_lineitemctnr="${pdict.Basket}" p_totallabel="${Resource.msg('global.estimatedtotal','locale',null)}" />
+                        <isordertotals p_lineitemctnr="${pdict.Basket}" p_romtotal="${pdict.currencyResponse}" p_totallabel="${Resource.msg('global.estimatedtotal','locale',null)}" />
                     </div>
                     <div class="cart-coupon-code">
 

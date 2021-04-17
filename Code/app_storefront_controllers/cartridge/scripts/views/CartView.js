@@ -9,6 +9,7 @@ var View = require('./View');
 
 var Cart = require('~/cartridge/scripts/models/CartModel');
 var Transaction = require('dw/system/Transaction');
+var currencyHelper  = require('*/cartridge/scripts/services/currencySoapHelper');
 
 /**
  * Updates shipments, coupons, and cart calculation for the view.
@@ -29,11 +30,15 @@ var CartView = View.extend({
         var cart = this.Basket;
         if (cart) {
 
+            // //Send to Service Helper     
+            var orderTotal = cart.totalGrossPrice.available?cart.totalGrossPrice:cart.getAdjustedMerchandizeTotalPrice(true).add(cart.giftCertificateTotalPrice);
+            var response =currencyHelper.getConvertedAmount(orderTotal);
+
             // Refreshes shipments.
             session.forms.cart.shipments.copyFrom(cart.shipments);
             // Refreshes coupons.
             session.forms.cart.coupons.copyFrom(cart.couponLineItems);
-           // Refreshes the cart calculation.
+            // Refreshes the cart calculation.
             Transaction.wrap(function () {
                 Cart.get(cart).calculate();
             });
@@ -42,6 +47,7 @@ var CartView = View.extend({
             this.EnableCheckout = validationResult.EnableCheckout;
             this.BasketStatus = validationResult.BasketStatus;
             this.WishList = customer.authenticated ? require('~/cartridge/scripts/models/ProductListModel').get() : null;
+            this.currencyResponse = response.data;
         }
 
         return;
