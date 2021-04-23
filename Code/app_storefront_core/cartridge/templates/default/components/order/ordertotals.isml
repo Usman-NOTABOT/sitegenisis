@@ -138,6 +138,9 @@
                 <iscomment> //msgf for parameter </iscomment>
                 <td>${Resource.msgf("order.rom.currency","order",null,pdict.p_romtotal)}</td>
 
+              <iscomment> <isif condition="${orderTotalValue > 200}"> </iscomment>
+               <iscomment> <h2>Value exceeded 200</h2> </iscomment>
+                <iscomment> </isif> </iscomment>
 
             </tr>
         </tbody>

@@ -74,6 +74,39 @@ function detail() {
 
 }
 
+function RecommendationTask() {
+    var ISML = require('dw/template/ISML');
+    var productID = request.httpParameterMap.pid.value;
+    const Product = app.getModel('Product');
+    const product = Product.get(productID);
+    var cgid;
+    //Check primary category then if variant get its master id
+    if (product.object.primaryCategory) {
+        cgid = product.object.primaryCategory.ID;
+        //Search Model of Category
+    } else if(product.object.variant) {
+        cgid= product.object.masterProduct.primaryCategory.ID
+    }
+    if (cgid) {
+        var ProductSearchModel = require("dw/catalog/ProductSearchModel");
+        var CatalogMgr = require('dw/catalog/CatalogMgr');
+        var psm = new ProductSearchModel();
+        psm.setCategoryID(cgid);
+        
+        var sortingRule = CatalogMgr.getSortingRule('price-low-to-high');
+        if (sortingRule) {
+            psm.setSortingRule(sortingRule);
+        }
+        
+        psm.search();
+        var products = psm.getProductSearchHits();
+
+        ISML.renderTemplate("product/productrecommendation.isml", {
+            products: products,
+        });
+    }
+}
+
 /**
  * Returns product availability data as a JSON object.
  *
@@ -167,7 +200,6 @@ function productNavigation() {
         }
 
         // Execute the product searchs
-        productSearchModel.search();
 
         // construct the paging model
         PagingModel = require('dw/web/PagingModel');
@@ -452,3 +484,6 @@ exports.GetBonusProducts = guard.ensure(['get'], getBonusProducts);
  * @see module:controllers/Product~getSetItem
  */
 exports.GetSetItem = guard.ensure(['get'], getSetItem);
+
+exports.RecommendationTask = guard.ensure(['get'], RecommendationTask);
+

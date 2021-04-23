@@ -236,11 +236,20 @@
                             price.value = StandardPrice;
                         }
                     }
+
+                    //Std Price and sales price
+                    var priceCheck = StandardPrice.available && SalesPrice.available && StandardPrice.compareTo(SalesPrice) == -1;
+                    var salePercentage = (1 - (SalesPrice.value / StandardPrice.value))*100;
+                    var salePercentage = Math.round(salePercentage);
+
                     prices.push(price);
                     if (extraPrice) {prices.push(extraPrice);}
                 </isscript>
+                    <isprint value=${Resource.msgf('sale.percentage','order', null,salePercentage)} style="INTEGER"/>
+                   <br>
                 <isloop items="${prices}" var="productPrice">
                     <span class="${productPrice.class}" title="${productPrice.title}"><isprint value="${productPrice.value}"/></span>
+                    <iscomment> <span class="${productPrice.class}" title="${productPrice.title}"><isprint value="${salePercentage}"/></span> </iscomment>
                 </isloop>
             </div>
         </isif>

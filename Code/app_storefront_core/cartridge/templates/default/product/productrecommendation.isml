@@ -1,0 +1,12 @@
+
+<isinclude template="util/modules"/>
+
+<h1>Recommendation Custom Isml</h1>
+
+    <ul>
+        <isloop items="${pdict.products}" var="productHit" status="loopstate" begin="0" end="3">
+            <li>
+                <isproducttile product="${productHit.getProduct()}" showpricing="${true}"/>
+            </li>
+        </isloop>
+    </ul>

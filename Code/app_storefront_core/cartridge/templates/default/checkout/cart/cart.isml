@@ -865,6 +865,19 @@
                             </div>
                         </isif>
                     </div>
+
+                <isif condition="${pdict.Basket.totalGrossPrice.available}">
+                    <isset name="orderTotalValue" value="${pdict.Basket.totalGrossPrice}" scope="page"/>
+                       <iselse/>
+                    <isset name="orderTotalValue" value="${pdict.Basket.getAdjustedMerchandizeTotalPrice(true).add(pdict.Basket.giftCertificateTotalPrice)}" scope="page"/>
+                </isif>
+
+                    <iscontentasset aid="value-exceed"/>
+
+                  <isif condition="${orderTotalValue > 200}">
+                    ${Resource.msgf("order.value.exceeded","order",null)}
+                </isif>
+
                 </div>
                 <input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
 

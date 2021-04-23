@@ -9,7 +9,8 @@
         <iselse/>
             <isinclude template="product/producttopcontent" />
         </isif>
-
+         <isinclude url="${URLUtils.url('Product-RecommendationTask','pid',pdict.Product.ID)}" />
+            <iscomment> <isinclude  template="product/productrecommendation" /> </iscomment>
     </div><!--/pdpMain -->
 </isobject>
 <isslot id="recomm-prod-anchor" description="Product page slot" context="global" context-object="${pdict.Product}"/>
