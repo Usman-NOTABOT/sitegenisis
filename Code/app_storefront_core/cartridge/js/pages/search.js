@@ -3,6 +3,7 @@
 var compareWidget = require('../compare-widget'),
     productTile = require('../product-tile'),
     progress = require('../progress'),
+    dialog = require('../dialog'),
     util = require('../util');
 
 function infiniteScroll() {
@@ -95,8 +96,7 @@ function initializeEvents() {
 
     // handle toggle refinement blocks
     $main.on('click', '.refinement h3', function () {
-        $(this).toggleClass('expanded')
-        .siblings('ul').toggle();
+        $(this).toggleClass('expanded').siblings('ul').toggle();
     });
 
     // handle events for updating grid
@@ -138,15 +138,15 @@ function initializeEvents() {
         e.preventDefault();
         updateProductListing($(this).find('option:selected').val());
     })
-    .on('change', '.items-per-page select', function () {
-        var refineUrl = $(this).find('option:selected').val();
-        if (refineUrl === 'INFINITE_SCROLL') {
-            $('html').addClass('infinite-scroll').removeClass('disable-infinite-scroll');
-        } else {
-            $('html').addClass('disable-infinite-scroll').removeClass('infinite-scroll');
-            updateProductListing(refineUrl);
-        }
-    });
+        .on('change', '.items-per-page select', function () {
+            var refineUrl = $(this).find('option:selected').val();
+            if (refineUrl === 'INFINITE_SCROLL') {
+                $('html').addClass('infinite-scroll').removeClass('disable-infinite-scroll');
+            } else {
+                $('html').addClass('disable-infinite-scroll').removeClass('infinite-scroll');
+                updateProductListing(refineUrl);
+            }
+        });
 }
 
 exports.init = function () {
@@ -157,3 +157,38 @@ exports.init = function () {
     productTile.init();
     initializeEvents();
 };
+
+
+$("#custom-prod-search").on("submit", function (e) {
+    e.preventDefault();
+    var url = $(this).attr("action");
+    var pid = $(this).find("#p-search").val();
+    if (pid == "") {
+        alert("kithay payinnn, form not filled eh ?");
+    } else {
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: {pid:pid,Quantity:1} ,
+        }).done(function (response) {
+            if (response.data.success) {
+                //cart url
+                location.href=response.data.msg;
+                // page.redirect(response.msg);
+                console.log(response);
+            } else {
+                //display error in popup
+                var Url= Urls.showErrorPopup;
+                var finalUrl = util.appendParamToURL(Url,'error',response.data.msg);
+                dialog.open({
+                    // target: this.$container,
+                    url: finalUrl,
+                    options: {
+                        width: 920,
+                        title: 'Error',
+                    }
+                });
+            }
+        });
+    }
+});

@@ -1,0 +1,8 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<form id="custom-prod-search" role="search" action="${URLUtils.url('Search-AddProduct')}" method="get" name="simpleProductSearch">
+    <fieldset>
+        <label class="visually-hidden" for="p-search">${Resource.msg('global.searchcatalog', 'locale', null)}</label>
+        <input type="text" id="p-search" name="p-search" value="" placeholder="${Resource.msg('simplesearch.searchtext.prod', 'search', null)}" />
+        <button type="submit"><span class="visually-hidden">${Resource.msg('global.search', 'locale', null)}</span><i class="fa fa-search"></i></button>
+    </fieldset>
+</form>

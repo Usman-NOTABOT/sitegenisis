@@ -153,6 +153,7 @@ ResourceHelper.getUrls = function(pageContext) {
     // application urls
     var urls =  {
         productPopup                : URLUtils.url('Popup-showPopup').toString(),
+        showErrorPopup              : URLUtils.url('Popup-showErrorPopup').toString(),
         appResources                : URLUtils.url('Resources-Load').toString(),
         pageInclude                 : URLUtils.url('Page-Include').toString(),
         continueUrl                 : request.isHttpSecure() ? URLUtils.httpsContinue().toString() : URLUtils.httpContinue().toString(),

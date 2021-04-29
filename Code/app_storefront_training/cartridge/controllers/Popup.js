@@ -26,4 +26,17 @@ function showPopup() {
     productLineItem: lineItem[0],
   });
 }
+;
+
+//testing function from controller
+function showErrorPopup() {
+  var errorKey = request.httpParameterMap.error.stringValue;
+
+  var Resource = require('dw/web/Resource');
+  ISML.renderTemplate("/Popups/productSearch.isml", {
+    errorKey: Resource.msg(['error.msg', errorKey].join('.'),'search',null)
+  });
+}
+
 exports.showPopup = guard.ensure(["get"], showPopup);
+exports.showErrorPopup = guard.ensure(["get"], showErrorPopup)

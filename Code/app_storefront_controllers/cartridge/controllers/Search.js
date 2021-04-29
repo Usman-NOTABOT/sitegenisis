@@ -274,6 +274,48 @@ function showProductGrid() {
 
 }
 
+
+
+function addProduct() {
+    var params = request.httpParameterMap;
+    var pid = params.pid.stringValue;
+    var ProductMgr = require('dw/catalog/ProductMgr');
+    var prod = ProductMgr.getProduct(pid);
+    var result = {success: false};
+    
+    if(!prod){
+        //key from properties
+        result.msg = 'noprod';
+    }else{
+        if(!prod.availabilityModel.isInStock()){
+            result.msg = "Product not in stock";
+        }
+        if(prod.master){
+            result.msg = "Product is a master product";
+        }
+        if(prod.productSet){
+            result.msg = "Product is a product";
+        }
+        if(!prod.online){
+            result.msg = "Product is not online";
+        } 
+        var cart = app.getModel('Cart').goc();
+        // var params ={pid:pid,Quantity:1};
+        var renderInfo = cart.addProductToCart();
+        var URLUtils = require('dw/web/URLUtils');
+    
+        if(renderInfo){
+            result.success = true;
+            result.msg = URLUtils.url("Cart-Show").abs().toString();
+        }
+    }
+
+    let r = require('~/cartridge/scripts/util/Response');
+    r.renderJSON({
+        data: result
+    });
+}
+
 /*
  * Web exposed methods
  */
@@ -290,3 +332,5 @@ exports.ShowContent     = guard.ensure(['get'], showContent);
 /** Determines search suggestions based on a given input and renders the JSON response for the list of suggestions.
  * @see module:controllers/Search~getSuggestions */
 exports.GetSuggestions = guard.ensure(['get'], getSuggestions);
+
+exports.AddProduct            = guard.ensure(['get'], addProduct);
