@@ -1,0 +1,25 @@
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+<isinclude template="util/modules" />
+
+<iscomment> <head>
+    <isinclude template="components/header/htmlhead"/>
+</head> </iscomment>
+
+<h1>Newletter Subscription</h1>
+
+<form action="${URLUtils.httpsContinue()}" method="post" class="form-horizontal" id="HelloForm">
+    <fieldset>
+        <isinputfield formfield="${pdict.CurrentForms.newsletter.fname}" type="input" />
+        <isinputfield formfield="${pdict.CurrentForms.newsletter.lname}" type="input" />
+        <isinputfield formfield="${pdict.CurrentForms.newsletter.email}" type="input" />
+        <isif condition="${pdict.error}" >
+        <isprint value="${pdict.error}"/>
+        </isif>
+    </fieldset>
+    <fieldset>
+        <button type="submit" name="${pdict.CurrentForms.newsletter.submit.htmlName}" value="submit">Submit</button>
+        <button type="cancel" name="${pdict.CurrentForms.newsletter.cancel.htmlName}" value="submit">Cancel</button>
+    </fieldset>
+</form>
+
+<isinclude template="components/footer/footer" />

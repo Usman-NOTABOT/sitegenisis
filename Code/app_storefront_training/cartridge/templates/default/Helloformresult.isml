@@ -1,36 +1,7 @@
 
     <iscontent type="text/html" charset="UTF-8" compact="true" />
-
     <body>
         <h1>Hello World Form Result</h1>
         <p>Thank you for entering: </p>
-        <p>${pdict.CurrentForms.test_form.nickname.label} ${pdict.CurrentForms.test_form.nickname.value}</p>
+        <p>Coupon Code sent successfully to:${pdict.CurrentForms.newsletter.email.value}</p>
     </body>
-
-
-<iscomment> ${pdict.Product.name}
-<isset name="Product" value="${pdict.Product}" scope="page" />
-<isif condition="${Product.master && Product.priceModel.isPriceRange() /** 1.Check if product is a master product and price is range format **/}">
-    <isprint value="${Product.priceModel.minPrice}" />
-<iselseif condition="${Product.master && !Product.priceModel.isPriceRange()}" />
-    <isset name="OrgProduct" value="${Product}" scope="page" />
-    <isset name="Product" value="${Product.variationModel.getVariants()[0]/** 2.Get the first variant of OrgProduct **/}" scope="page" />
-</isif>
-<isif condition="${Product.optionProduct}">
-    <isset name="PriceModel" value="${Product.getPriceModel(Product.getOptionModel())}" scope="page" />
-    <iselse>
-        <isset name="PriceModel" value="${Product.getPriceModel()}" scope="page" />
-</isif>
-<isinclude template="product/components/standardprice" />
-<isset name="SalesPrice" value="${PriceModel.price}" scope="page" />
-<isset name="ShowStandardPrice" value="${StandardPrice.available && SalesPrice.available && StandardPrice.compareTo(SalesPrice) == 1}" scope="page" />
-<isif condition="${ShowStandardPrice}">
-    <span class="product-standard-price" title="Regular Price">
-        <isprint value="${StandardPrice}" /></span>
-    <span class="product-sales-price" title="Sale Price">
-        <isprint value="${SalesPrice}" /></span>
-    <iselse>
-        <span class="product-sales-price" title="Sale Price">
-            <isprint value="${SalesPrice}" /></span>
-</isif>
-<isset name="Product" value="${OrgProduct}" scope="page" /> </iscomment>

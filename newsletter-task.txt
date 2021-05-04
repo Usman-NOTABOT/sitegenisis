@@ -1,0 +1,22 @@
+NewsLetter Task :
+
+Branch Name : feature/newsletter
+
+-Creating a Form for Name and Email 
+ 
+1) newsletter.xml (binding custom Objects) 
+2) newsletter form in template (binding the xml form) 
+3) Controller to render form 
+
+
+-Getting the Coupon Code
+				var Transaction = require("dw/system/Transaction");
+				var PromotionMgr = require("dw/campaign/PromotionMgr");
+				var campaign = PromotionMgr.getCampaign("testing-newsletter-task");
+					campaign.getCoupons().toArray().forEach(function (code) {
+						if (code.ID == "newsletter-coupon") {
+							Transaction.wrap(function () {
+								var nextCode = code.getNextCouponCode();
+							}
+						}
+					}
