@@ -1,11 +1,9 @@
 <iscontent type="text/html" charset="UTF-8" compact="true" />
 <isinclude template="util/modules" />
 
-<iscomment> <head>
-    <isinclude template="components/header/htmlhead"/>
-</head> </iscomment>
-
-<h1>Newletter Subscription</h1>
+<h1>
+    <isprint value="${Resource.msg('newsletter.couponcode', 'forms',null)}"/>
+</h1>
 
 <form action="${URLUtils.httpsContinue()}" method="post" class="form-horizontal" id="HelloForm">
     <fieldset>
@@ -17,8 +15,8 @@
         </isif>
     </fieldset>
     <fieldset>
-        <button type="submit" name="${pdict.CurrentForms.newsletter.submit.htmlName}" value="submit">Submit</button>
-        <button type="cancel" name="${pdict.CurrentForms.newsletter.cancel.htmlName}" value="submit">Cancel</button>
+        <button type="submit" name="${pdict.CurrentForms.newsletter.submit.htmlName}" value="submit">${Resource.msg('global.go','locale',null)}</button>
+        <button type="cancel" name="${pdict.CurrentForms.newsletter.cancel.htmlName}" value="submit">${Resource.msg('global.cancel','locale',null)}</button>
     </fieldset>
 </form>
 

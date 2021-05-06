@@ -1,0 +1,1 @@
+<isprint value="${Resource.msg('email.error.' + pdict.key, 'error',null)}"/>
