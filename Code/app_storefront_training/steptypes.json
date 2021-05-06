@@ -147,6 +147,45 @@
             }
           ]
         }
+      },
+      {
+        "@type-id": "custom.exportOrders",
+        "@supports-parallel-execution": "false",
+        "@supports-site-context": "true",
+        "@supports-organization-context": "false",
+        "description": "Check Product Inventory",
+        "module": "app_storefront_training/cartridge/scripts/job/exportOrders.js",
+        "function": "execute",
+        "transactional": "true",
+        "timeout-in-seconds": "600000",
+        "parameters":
+        {
+          "parameter":
+          [
+            {
+              "@name":"destination",
+              "@type":"string",
+              "@required":"true",
+              "description":"file destination"
+            }
+          ]
+        },
+        "status-codes": {
+          "status": [
+            {
+              "@code": "ERROR",
+              "description": "Used when the step failed with an error."
+            },
+            {
+              "@code": "FINISHED",
+              "description": "Used when the step finished successfully."
+            },
+            {
+              "@code": "FINISHED_WITH_WARNINGS",
+              "description": "Used when the step finished with warnings."
+            }
+          ]
+        }
       }
     ]
   }
