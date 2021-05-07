@@ -1,0 +1,11 @@
+1) Create a script
+Jobs folder that is executed function -> writes into files
+
+2) stepstype.json
+For Bm job, add here in json file
+Params added here aswell
+
+
+3) Create a job in BM
+Execute Job in BM
+Administrator-> Jobs
