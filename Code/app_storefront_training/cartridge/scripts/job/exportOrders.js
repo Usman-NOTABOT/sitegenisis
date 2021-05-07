@@ -13,7 +13,7 @@ var XMLStreamWriter = require("dw/io/XMLStreamWriter");
  */
 
 function execute(param) {
-	var feedDirectory =	File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR + "test" + File.SEPARATOR;
+	var feedDirectory =	File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR + param.destination + File.SEPARATOR;
 	var feedFileName = "orderExport.xml";
 	var fullPath = feedDirectory + feedFileName;
 
@@ -51,6 +51,15 @@ function execute(param) {
 			if (order.getCustomerNo()) {
 				xsw.writeStartElement("customerNo");
 				xsw.writeCharacters(order.getCustomerNo());
+				xsw.writeEndElement();
+			}
+
+			var productCollection = order.getAllProductLineItems().toArray();
+			if(productCollection){
+				xsw.writeStartElement("productIDS");
+				productCollection.forEach(function(product) {
+					xsw.writeCharacters(product.productID);
+				});
 				xsw.writeEndElement();
 			}
 			xsw.writeStartElement("total");
