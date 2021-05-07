@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+
+	<field formid="fname" label="profile.firstname" binding='custom.fname' type="string" mandatory="true" max-length="50" />
+	<field formid="lname" label="profile.lastname" binding='custom.lname' type="string" mandatory="true" max-length="50" />
+	<field formid="email" label="resource.email" binding='custom.email' type="string" mandatory="true" max-length="50" />
+	<action formid="submit" valid-form="true"/>
+	<action formid="cancel" valid-form="false"/>
+
+</form>

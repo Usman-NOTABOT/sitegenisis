@@ -1,1 +1,3 @@
-${pdict.Nickname}
+${pdict.email}
+
+Here is your coupon code : ${pdict.code}
